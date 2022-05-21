@@ -47,7 +47,7 @@ public:
         if(currNode->word.size()>0)
         {
             wordsOnBoard.push_back(currNode->word); 
-            currNode->word.clear();
+            currNode->word = "";
         }    
 
         board[x][y]='#';
