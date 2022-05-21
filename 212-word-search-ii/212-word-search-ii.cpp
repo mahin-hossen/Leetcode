@@ -41,10 +41,10 @@ public:
     void dfs(int x,int y,TrieNode* currNode,vector<vector<char>>&board,vector<string> &wordsOnBoard)
     {
         char ch = board[x][y];
-        if(currNode==NULL || currNode->next[ch-'a']==NULL) return;    
+        if(ch=='#' || (currNode && currNode->next[ch-'a']==NULL)) return;    
         currNode = currNode->next[ch-'a']; 
 
-        if(currNode->word.size()>0)
+        if(currNode && currNode->word.size()>0)
         {
             wordsOnBoard.push_back(currNode->word); 
             currNode->word = "";
