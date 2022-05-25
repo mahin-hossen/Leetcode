@@ -8,40 +8,26 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+/*
+TC : 0(n)
+MC : 0(1)
+*/
 class Solution 
 {
 public:
-    int getLength(ListNode* head)    
-    {
-        int len = 0;
-        auto currNode = head;
-        
-        while(currNode->next)
-        {             
-            len++;
-            currNode = currNode->next;
-        }
-        
-        return len;
-    }
+
     int getDecimalValue(ListNode* head) 
     {
-        
-        int len = getLength(head);
         auto currNode = head;
-        int decValue = 0;
+        int decVal = 0;
         
         while(currNode)
         {
-            if(currNode->val)
-            {
-                decValue+=1<<len;
-            }            
-            len--;
+            decVal = decVal*2 + currNode->val;
             currNode = currNode->next;
         }
         
-        return decValue;
+        return decVal;
         
     }
 };
