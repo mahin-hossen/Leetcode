@@ -16,19 +16,17 @@ public:
         if(!head) return head;
         
         auto curr = head;
-        ListNode* prev = NULL;
-        auto next = curr->next;
+        ListNode* prev = NULL;        
         
-        while(curr->next)
+        while(curr)
         {            
+            auto next = curr->next;            
             curr->next = prev;
             prev = curr;
-            curr = next;
-            next = next->next;            
+            curr = next;            
         }
         
-        curr->next = prev;
-        return curr;        
+        return prev;        
         
     }
 };
