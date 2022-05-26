@@ -12,16 +12,14 @@ public:
     
     bool hasCycle(ListNode *head) 
     {
-        unordered_map<ListNode*,int> counter;        
-        auto curr = head;
-        
-        while(curr)
-        {
-            counter[curr]++;
-            if(counter[curr]>1) return true;
-            curr = curr->next;
+        auto slow = head, fast = head;       
+        while(fast && fast->next)
+        {            
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow==fast) return true;
         }
         
-        return false;
+        return false;        
     }
 };
