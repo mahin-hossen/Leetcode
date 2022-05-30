@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    void calculateCarry(int &sum,int &carry)
+    void assignSum(int &sum,int &carry,ListNode* &newList)
     {
         if(carry) carry--;
         if(sum>9)
@@ -18,46 +18,40 @@ public:
             sum-=10;
             carry++;
         }
+        newList->next = new ListNode(sum);
+        newList = newList->next;
     }
+    
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
     {   
         ListNode* newList = new ListNode();
         auto newHead = newList;
-        int sum, carry = 0;
+        int sum = 0, carry = 0;
         
         while(l1 && l2)
         {
             sum = l1->val + l2->val + carry;
             l1 = l1->next;
             l2 = l2->next;            
-            calculateCarry(sum,carry);
-            
-            newList->next = new ListNode(sum);
-            newList = newList->next;
+            assignSum(sum,carry,newList);
         }
         
         while(l1)
         {
             sum = carry+ l1->val; 
             l1=l1->next;
-            calculateCarry(sum,carry);
-            
-            newList->next = new ListNode(sum);            
-            newList = newList->next;
+            assignSum(sum,carry,newList);
         }
         while(l2)
         {
             sum = carry+ l2->val; 
             l2 = l2->next;
-            calculateCarry(sum,carry);
-            
-            newList->next = new ListNode(sum);            
-            newList = newList->next;
+            assignSum(sum,carry,newList);
         }
         if(carry)
         {
-            newList->next = new ListNode(carry);
-            carry--;
+            sum = 1;
+            assignSum(sum,carry,newList);           
         }            
         
         *newHead = *newHead->next;
