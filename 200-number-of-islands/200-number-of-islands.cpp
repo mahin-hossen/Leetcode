@@ -1,6 +1,6 @@
 class Solution {
 public:
-    const int dirs[5] = {-1,0,1,0,-1};
+    static constexpr int dirs[5] = {-1,0,1,0,-1};
     int n, m;
     void traverseIslands(int x,int y,vector<vector<char>>& grid)
     {
