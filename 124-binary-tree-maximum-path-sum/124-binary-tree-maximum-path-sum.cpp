@@ -23,7 +23,7 @@ public:
     int maxPathSum(TreeNode* root)
     {        
         pathSum = INT_MIN;
-        maxChainSum(root);
+        int chainSum = maxChainSum(root);
         return pathSum;
     }
 };
