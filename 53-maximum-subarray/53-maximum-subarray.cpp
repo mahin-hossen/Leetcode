@@ -1,23 +1,33 @@
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) 
+    int crossingSum(vector<int>&nums,int L, int mid, int R)
     {
-/*
-[-2,1,-3,4,-1,2,1,-5,4]
- -2 -1 -4 0 -1 1 2 -3 1
- 
-[5,4,-1,7,8]
- 5 9 8 15 23
-*/        
-        int maxSub = nums[0];
-        int currSub = nums[0];
-        
-        for(int i=1;i<nums.size();i++)
+        int LS = 0, RS = 0, LMax = INT_MIN, RMax = INT_MIN;
+        for(int i=mid;i>=L;i--)
         {
-            currSub = max(nums[i],nums[i]+currSub);
-            maxSub = max(currSub,maxSub);
+            LS += nums[i];
+            LMax = max(LS,LMax);
         }
         
-        return maxSub;
+        for(int i=mid+1;i<=R;i++)
+        {
+            RS += nums[i];
+            RMax = max(RMax,RS);
+        }
+        return LMax+RMax;
+    }
+    int divideAndConquer(vector<int> &nums,int L,int R)
+    {
+        if(L==R) return nums[L];
+        int mid = L+(R-L)/2;
+        int LS = divideAndConquer(nums,L,mid);
+        int RS = divideAndConquer(nums,mid+1,R);
+        int CS = crossingSum(nums,L,mid,R);
+        return max(CS,max(LS,RS));
+    }
+    int maxSubArray(vector<int>& nums) 
+    {
+        if(nums.size()==0) return 0;
+        return divideAndConquer(nums,0,nums.size()-1);
     }
 };
