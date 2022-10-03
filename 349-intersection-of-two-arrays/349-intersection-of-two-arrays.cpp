@@ -10,12 +10,13 @@ public:
         int num1Sz = nums1.size(), num2Sz = nums2.size();
         for(int i=0,j=0;i<num1Sz && j<num2Sz;)
         {
+            while(i+1<num1Sz && nums1[i]==nums1[i+1]) i++;
+            while(j+1<num2Sz && nums2[j]==nums2[j+1]) j++;
+            
             if(nums1[i]>nums2[j])  j++;
             else if(nums1[i]==nums2[j])
             {
-                intersect.push_back(nums1[i]);                
-                while(i+1<num1Sz && nums1[i]==nums1[i+1]) i++;
-                while(j+1<num2Sz && nums2[j]==nums2[j+1]) j++;
+                intersect.push_back(nums1[i]);               
                 i++,j++;
             }
             else i++;
