@@ -1,16 +1,36 @@
 class Solution {
 public:
+    /*
+    6 6 7
+    6 6 7
+    */
+    vector<int>setIntersect(vector<int>&nums1,vector<int>& nums2)
+    {
+        vector<int> intersect;
+        int num1Sz = nums1.size(), num2Sz = nums2.size();
+        for(int i=0,j=0;i<num1Sz && j<num2Sz;)
+        {
+            if(nums1[i]>nums2[j])  j++;
+            else if(nums1[i]==nums2[j])
+            {
+                intersect.push_back(nums1[i]);                
+                while(i+1<num1Sz && nums1[i]==nums1[i+1]) i++;
+                while(j+1<num2Sz && nums2[j]==nums2[j+1]) j++;
+                i++,j++;
+            }
+            else i++;
+        }
+        return intersect;
+    }
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
     {
+        //if already sorted
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
         vector<int>intersect;
-        unordered_set<int>bucket(nums1.begin(),nums1.end());
-        unordered_set<int>bucket2(nums2.begin(),nums2.end());
-
-        for(auto it: bucket)
-        {
-            if(bucket2.count(it))
-                intersect.push_back(it);
-        }
+        
+        intersect = nums1.size()>nums2.size() ? setIntersect(nums1,nums2) : setIntersect(nums2,nums1);        
+        
         return intersect;
     }
 };
