@@ -17,7 +17,12 @@ public:
         while(list && list->next)
         {
             if(list->val==list->next->val)
-                list->next = list->next->next;
+            {
+                auto dummy = list->next->next;
+                delete list->next;           
+                list->next = dummy;                     
+            }
+                
             else list = list->next;
         }
         //5 5 5 3 3 
