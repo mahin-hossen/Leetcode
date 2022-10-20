@@ -12,18 +12,15 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) 
     {
-        ListNode *curr = new ListNode(-1,head);
-        auto newHead = curr;
+        auto list = head;
         
-        for(;head && head->next;head=head->next)
-        {            
-            if(head->next->val == head->val) continue;            
-            curr->next = head;
-            curr = curr->next;            
+        while(list && list->next)
+        {
+            if(list->val==list->next->val)
+                list->next = list->next->next;
+            else list = list->next;
         }
-        
-        if(head) curr->next = head;
-        
-        return newHead->next;
+        //5 5 5 3 3 
+        return head;
     }
 };
