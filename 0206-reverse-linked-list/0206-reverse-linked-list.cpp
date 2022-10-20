@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) 
+    ListNode* reverseList(ListNode* head) //3
     {
         //1 2 3 4 5
         //5 4 3 2 1
@@ -18,15 +18,18 @@ public:
         1 2 3
         1->null
         */
-        ListNode *prev = nullptr, *curr;
-        while(head)
-        {            
-            curr = head;
-            head = head->next;
-            curr->next = prev;
-            prev = curr;        
-        }
-        return prev;
+        
+        if(!head || !head->next) return head;
+        auto reverseListHead = reverseList(head->next);
+        head->next->next = head;
+        head->next = nullptr;
+
+        return reverseListHead;
+        
+        
+        // if(!head) return head;
+        // head->next = reverseList(head->next);                
+        // return head;
         
     }
 };
