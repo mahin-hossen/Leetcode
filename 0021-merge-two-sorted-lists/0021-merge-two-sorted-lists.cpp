@@ -11,9 +11,10 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
-    {       
-        // ListNode *mergedList;
-        // auto mergedListHead = mergedList;
+    {
+        if(!list1) return list2;
+        if(!list2) return list1;
+        
         ListNode *mergedListHead = new ListNode();
         auto mergedList = mergedListHead;
         
