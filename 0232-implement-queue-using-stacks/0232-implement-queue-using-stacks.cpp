@@ -1,45 +1,36 @@
 class MyQueue {
 public:
-    /// 1 2 3 4 5
-    /// 
-    /// 5 4 3 2
-    /// 2 3 4 5
-    stack<int> main, aux;
-    MyQueue() 
-    {
+    stack<int> input, output; //input reveresd/output ordered
+    MyQueue() {
         
     }
     
-    void push(int x) 
-    {
-        while(!main.empty())//main->aux(reversed)
-        {
-            aux.push(main.top());
-            main.pop();
-        }
-        aux.push(x);
-        while(!aux.empty())
-        {
-            main.push(aux.top());
-            aux.pop();
-        }
+    void push(int x) {
+        input.push(x);        
     }
     
-    int pop()
-    {
-        int num = main.top();
-        main.pop();
+    int pop() {
+        int num = peek();
+        output.pop();
         return num;
     }
     
-    int peek() 
-    {
-        return main.top();
+    int peek() {
+        //5 4 3 2 1 //in
+        //1 2 3 4 5 //out
+        if(output.empty())
+        {
+            while(!input.empty())
+            {
+                output.push(input.top());
+                input.pop();
+            }
+        }
+        return output.top();        
     }
     
-    bool empty() 
-    {
-        return main.empty();
+    bool empty() {
+        return (input.empty() && output.empty());
     }
 };
 
