@@ -23,7 +23,7 @@ public:
     }
     vector<int> preorderTraversal(TreeNode* root) 
     {
-        if(!root) return {};
+        // if(!root) return {};
         
         vector<int> order;        
         stack<TreeNode*> bucket;        
@@ -32,7 +32,7 @@ public:
             1
            2 3
         */
-        while(!bucket.empty())
+        while(root && !bucket.empty())
         {   
             if(bucket.top()==NULL)
             {
