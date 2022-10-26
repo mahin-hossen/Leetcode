@@ -23,8 +23,37 @@ public:
     }
     vector<int> preorderTraversal(TreeNode* root) 
     {
-        vector<int> order;
-        traverse(root,order);
+        if(!root) return {};
+        
+        vector<int> order;        
+        stack<TreeNode*> bucket;        
+        bucket.push(root);
+        /*
+            1
+           2 3
+        */
+        while(!bucket.empty())
+        {   
+            if(bucket.top()==NULL)
+            {
+                bucket.pop();
+                continue;
+            }
+            auto front = bucket.top();
+            bucket.pop();
+            
+            order.push_back(front->val);
+            bucket.push(front->right);
+            bucket.push(front->left);            
+        }
+        
+        
+        
+        
+//         order.push_back(root->val);
+        
+//         bucket.push(root);
+//         traverse(root,order);
         return order;
     }
 };
