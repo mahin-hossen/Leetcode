@@ -11,20 +11,23 @@
  */
 class Solution {
 public:
-    void traverse(TreeNode* root, vector<int> &order)
-    {
-        if(!root) return;
-        
-        traverse(root->left,order);
-        order.push_back(root->val);
-        traverse(root->right,order);
-        
-        return;
-    }
     vector<int> inorderTraversal(TreeNode* root) 
-    {
+    {       
         vector<int>order;
-        traverse(root,order);
-        return order;
+        stack<TreeNode*> bucket; 
+        
+        while(root || !bucket.empty())
+        {
+            while(root)
+            {
+                bucket.push(root);
+                root=root->left;                
+            }
+            root = bucket.top();
+            bucket.pop();
+            order.push_back(root->val);
+            root=root->right;            
+        }
+        return order;        
     }
 };
