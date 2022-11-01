@@ -19,20 +19,20 @@ public:
         }
         if(leftNode && !rightNode)
         {
-            // swap(leftNode,rightNode);
-            auto dummy = leftNode;
-            leftNode = rightNode;
+            swap(leftNode,rightNode);
+            // auto dummy = leftNode;
+            // leftNode = rightNode;
             // rightNode = new TreeNode();
-            rightNode = dummy;
+            // rightNode = dummy;
             return invertTreeHelper(rightNode->left,rightNode->right);
         }
         if(!leftNode && rightNode)
         {
-            auto dummy = rightNode;
-            rightNode = leftNode;
-            // leftNode = new TreeNode();
-            leftNode = dummy;
-            // swap(leftNode,rightNode);
+            // auto dummy = rightNode;
+            // rightNode = leftNode;
+            // // leftNode = new TreeNode();
+            // leftNode = dummy;
+            swap(leftNode,rightNode);
             return invertTreeHelper(leftNode->left,leftNode->right);
 
         }   
